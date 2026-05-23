@@ -1,0 +1,30 @@
+[
+    {
+        "user": "hii",
+        "assistant": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0915\u0948\u0938\u0947 \u0939\u094b?"
+    },
+    {
+        "user": "mujhe baat  krna hai\n",
+        "assistant": "Bilkul, main sunne ke liye tayyar hoon. Kya haal hai, kis cheez ke bare mein baat karni hai?"
+    },
+    {
+        "user": "tumhara naam kya hai..?\n",
+        "assistant": "Mera naam Priya hai. Main aapki madad ke liye yahan hoon."
+    },
+    {
+        "user": "hiii",
+        "assistant": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0915\u0948\u0938\u0947 \u0939\u094b?"
+    },
+    {
+        "user": "hiii",
+        "assistant": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0915\u094d\u092f\u093e \u0939\u093e\u0932 \u0939\u0948?"
+    },
+    {
+        "user": "badiya tum batap\n",
+        "assistant": "dhanyavad, kaise ho aap?"
+    },
+    {
+        "user": "dsa ke bare mai kya janti ho\n",
+        "assistant": "DSA ka matlab hai Data Structure and Algorithm. Main iske bare mein bahut kuch janti hoon, jaise ki array, linked list, stack, queue, tree, graph, aur algorithm jaise ki sorting, searching, aur recursion. Aap kis cheez ke bare mein janna chahte hain?"
+    }
+]
