@@ -245,7 +245,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  const [history, setHistory] = useState([]);
+  // const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<any[]>([]);
 
   const assistantEnabled = useRef(false);
 
@@ -404,8 +405,9 @@ export default function Home() {
       const res = await fetch("http://192.168.222.1:8000/history");
 
       const data = await res.json();
+      console.log("HISTORY:", data);
 
-      setHistory(data.history);
+      setHistory(data.history || []);
     } catch (error) {
       console.log(error);
     }
@@ -448,7 +450,7 @@ export default function Home() {
           {response || "AI response appears here"}
         </div> */}
         <div className="bg-gray-900 p-5 rounded-xl space-y-4 max-h-[400px] overflow-y-auto">
-          {history.map((chat: any, index) => (
+          {history?.map((chat: any, index) => (
             <div key={index} className="border-b border-gray-700 pb-4">
               <p className="text-blue-400">
                 <strong>User:</strong> {chat.user}

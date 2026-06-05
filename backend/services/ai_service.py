@@ -1,30 +1,38 @@
-from groq import Groq
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+import requests
+from services.memory_service import get_last_messages
 
 
 def generate_ai_response(user_message):
 
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {
-                "role": "system",
-                "content": """
-                    You are Priya,
-                    a smart Hindi AI
-                    voice assistant.
+    history = get_last_messages(10)
 
-                    Speak naturally.
-                    Keep responses short.
-                    """,
-            },
-            {"role": "user", "content": user_message},
-        ],
+    messages = [
+        {
+            "role": "system",
+            "content": """
+            You are Priya, a smart Hindi AI voice assistant.
+
+            Remember previous conversation.
+            Speak naturally.
+            Keep responses short.
+            """,
+        }
+    ]
+
+    for chat in history:
+
+        messages.append({"role": "user", "content": chat["user"]})
+
+        messages.append({"role": "assistant", "content": chat["assistant"]})
+
+    messages.append({"role": "user", "content": user_message})
+
+    response = requests.post(
+        "http://localhost:11434/api/chat",
+        json={"model": "llama3", "messages": messages, "stream": False},
     )
 
-    return response.choices[0].message.content
+    data = response.json()
+    print(messages)
+
+    return data["message"]["content"]

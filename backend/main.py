@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from services.ai_service import generate_ai_response
 
 from services.summary_service import generate_summary
+from services.memory_service import save_chat
 
 import json
 import os
@@ -44,7 +45,8 @@ async def chat(data: ChatRequest):
         ai_response = generate_ai_response(user_message)
 
         # SAVE CHAT
-        conversation = {"user": user_message, "assistant": ai_response}
+        # conversation = {"user": user_message, "assistant": ai_response}
+        save_chat(user_message, ai_response)
 
         file_path = "data/conversations.json"
 
@@ -117,8 +119,13 @@ async def history():
 
         return {"history": conversations}
 
+    # except Exception as e:
+
+    #     print(e)
+
+    #     return {"history": []}
     except Exception as e:
 
-        print(e)
+        print("ERROR:", e)
 
-        return {"history": []}
+        return {"response": str(e)}

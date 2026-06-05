@@ -1,26 +1,27 @@
-from groq import Groq
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+import requests
 
 
 def generate_summary(conversation):
 
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {
-                "role": "system",
-                "content": """
-                    Summarize this
-                    conversation briefly.
+    response = requests.post(
+        "http://localhost:11434/api/chat",
+        json={
+            "model": "llama3",
+            "messages": [
+                {
+                    "role": "system",
+                    "content": """
+                    Summarize the conversation.
+                    Keep it short.
+                    Mention key points only.
                     """,
-            },
-            {"role": "user", "content": conversation},
-        ],
+                },
+                {"role": "user", "content": conversation},
+            ],
+            "stream": False,
+        },
     )
 
-    return response.choices[0].message.content
+    data = response.json()
+
+    return data["message"]["content"]
